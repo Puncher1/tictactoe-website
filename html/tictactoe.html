@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="{{ url_for('static', filename='style/styles.css') }}" rel="stylesheet" type="text/css">
+    <title>Home</title>
+</head>
+<body>
+    <header>
+        <p id="header-title">Tic-Tac-Toe</p>
+    </header>
+    <p id="state" class="no-state">state</p>
+    <div id="grid-container">
+        <table id="grid">
+            <tr class="row1">
+                <td id="00" class="empty"> </td>
+                <td id="01" class="empty"> </td>
+                <td id="02" class="empty"> </td>
+            </tr>
+            <tr class="row2">
+                <td id="10" class="empty"> </td>
+                <td id="11" class="empty"> </td>
+                <td id="12" class="empty"> </td>
+            </tr>
+            <tr class="row3">
+                <td id="20" class="empty"> </td>
+                <td id="21" class="empty"> </td>
+                <td id="22" class="empty"> </td>
+            </tr>
+        </table>
+    </div>
+    <button id="btn-restart">Restart</button>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/tictactoe.js') }}"></script>
+</body>
+</html>
