@@ -26,10 +26,10 @@ class TicTacToe {
 
     /**
      * Returns an array of every possible field of the grid.
-     * @param grid The tic-tac-toe grid
-     * @returns {Array[[Array[number]]]} All possible fields, which can be used
+     * @param grid {Array[string]} The tic-tac-toe grid
+     * @returns {Array[Array[number]]} All possible fields, which can be used
      */
-    getPossibleFields(grid: string) {
+    getPossibleFields(grid) {
         let possibleFields = []
         for (let i=0; i<3; i++) {
             for (let j=0; j<3; j++) {
@@ -45,21 +45,21 @@ class TicTacToe {
 
     /**
      * Returns the termination state (win, draw, lose).
-     * @param grid The tic-tac-toe grid
+     * @param grid {Array[string]} The tic-tac-toe grid
      * @returns {number} The state number (10=win, 0=draw, -10=lose)
      */
-    getTerminationState(grid: Array[string]) {
+    getTerminationState(grid) {
         if (this.checkWinner("X", grid)) {return 10}
         else if (this.checkWinner("O", grid)) {return -10}
     }
 
     /**
      * Checks if a player wins or not.
-     * @param player The player string (`O` or `X`)
-     * @param grid The tic-tac-toe grid
+     * @param player {string} The player string (`O` or `X`)
+     * @param grid {Array[string]} The tic-tac-toe grid
      * @returns {boolean} Whether the player wins or not
      */
-    checkWinner(player: string, grid: Array[string]) {
+    checkWinner(player, grid) {
         // horizontal check
         for (let i=0; i<3; i++) {
             let countH = 0
@@ -104,9 +104,9 @@ class TicTacToe {
 
     /**
      * Sets the state text above the tic-tac-toe grid.
-     * @param state The state number (10=win, 0=draw, -10=lose)
+     * @param state {number} The state number (10=win, 0=draw, -10=lose)
      */
-    setState(state: number) {
+    setState(state) {
         let stateObj = document.getElementById("state")
         stateObj.className = ""
         if (state == 10) {
@@ -123,38 +123,38 @@ class TicTacToe {
 
     /**
      * Sets the player move on the tic-tac-toe grid at specific coordinates.
-     * @param grid The tic-tac-toe grid
-     * @param coordinates The coordinates of the field of the player's move
+     * @param grid {Array[string]} The tic-tac-toe grid
+     * @param coordinates {Array[number]} The coordinates of the field of the player's move
      */
-    setPlayerMove(grid: Array[string], coordinates: Array[number]) {
+    setPlayerMove(grid, coordinates) {
         grid[coordinates[0]][coordinates[1]] = "O"
     }
 
     /**
      * Sets the bot move on the tic-tac-toe grid at specific coordinates.
-     * @param grid The tic-tac-toe grid
-     * @param coordinates The coordinates of the field of the bot's move
+     * @param grid {Array[string]} The tic-tac-toe grid
+     * @param coordinates {Array[number]} The coordinates of the field of the bot's move
      */
-    setBotMove(grid: Array[string], coordinates: Array[number]) {
+    setBotMove(grid, coordinates) {
         grid[coordinates[0]][coordinates[1]] = "X"
     }
 
     /**
      * Clears a field at specific coordinates.
-     * @param grid The tic-tac-toe grid
-     * @param coordinates The coordinates of the field
+     * @param grid {Array[string]} The tic-tac-toe grid
+     * @param coordinates {Array[number]} The coordinates of the field
      */
-    clearField(grid: Array[string], coordinates: Array[number]) {
+    clearField(grid, coordinates) {
         grid[coordinates[0]][coordinates[1]] = " "
     }
 
     /**
      * Minimax algorithm.
-     * @param tempGrid A temporary copy of the tic-tac-toe grid
-     * @param isMaximizer Whether the maximizer is due or not
+     * @param tempGrid {Array[string]} A temporary copy of the tic-tac-toe grid
+     * @param isMaximizer {boolean} Whether the maximizer is due or not
      * @returns {number}
      */
-    minimax(tempGrid: Array[string], isMaximizer: boolean) {
+    minimax(tempGrid, isMaximizer) {
         let possibleFields = this.getPossibleFields(tempGrid)
         let state = this.getTerminationState(tempGrid)
 
@@ -217,11 +217,11 @@ class TicTacToe {
 
     /**
      * Returns the move, which has to be made for a win.
-     * @param player The player's symbol
-     * @param grid The tic-tac-toe grid
+     * @param player {string} The player's symbol
+     * @param grid {Array[string]} The tic-tac-toe grid
      * @returns {Array[number] | null} The field or null
      */
-    getNextWinMove(player: string, grid: Array[string]) {
+    getNextWinMove(player, grid) {
         let possibleFields = JSON.stringify(this.getPossibleFields(this.grid))
 
         // horizontal check
