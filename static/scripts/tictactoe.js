@@ -1,11 +1,16 @@
 
 class TicTacToe {
+
     constructor() {
         this.grid = [[" ", " ", " "],
                      [" ", " ", " "],
                      [" ", " ", " "]]
     }
 
+    /**
+     * Returns every cell of the grid.
+     * @returns {Array[Element]}  The array of cells in grid
+     */
     getCells() {
         let rows = document.getElementById("grid").rows
         let cells = []
@@ -19,7 +24,12 @@ class TicTacToe {
         return cells
     }
 
-    getPossibleFields(grid) {
+    /**
+     * Returns an array of every possible field of the grid.
+     * @param grid The tic-tac-toe grid
+     * @returns {Array[[Array[number]]]} All possible fields, which can be used
+     */
+    getPossibleFields(grid: string) {
         let possibleFields = []
         for (let i=0; i<3; i++) {
             for (let j=0; j<3; j++) {
@@ -33,12 +43,23 @@ class TicTacToe {
         return possibleFields
     }
 
-    getTerminationState(grid) {
+    /**
+     * Returns the termination state (win, draw, lose).
+     * @param grid The tic-tac-toe grid
+     * @returns {number} The state number (10=win, 0=draw, -10=lose)
+     */
+    getTerminationState(grid: Array[string]) {
         if (this.checkWinner("X", grid)) {return 10}
         else if (this.checkWinner("O", grid)) {return -10}
     }
 
-    checkWinner(player, grid) {
+    /**
+     * Checks if a player wins or not.
+     * @param player The player string (`O` or `X`)
+     * @param grid The tic-tac-toe grid
+     * @returns {boolean} Whether the player wins or not
+     */
+    checkWinner(player: string, grid: Array[string]) {
         // horizontal check
         for (let i=0; i<3; i++) {
             let countH = 0
@@ -81,9 +102,11 @@ class TicTacToe {
         return false
     }
 
-    setState(state) {
-        // state: -10=lose, 0=draw, 10=win
-
+    /**
+     * Sets the state text above the tic-tac-toe grid.
+     * @param state The state number (10=win, 0=draw, -10=lose)
+     */
+    setState(state: number) {
         let stateObj = document.getElementById("state")
         stateObj.className = ""
         if (state == 10) {
@@ -98,19 +121,40 @@ class TicTacToe {
         }
     }
 
-    setPlayerMove(grid, coordinates) {
+    /**
+     * Sets the player move on the tic-tac-toe grid at specific coordinates.
+     * @param grid The tic-tac-toe grid
+     * @param coordinates The coordinates of the field of the player's move
+     */
+    setPlayerMove(grid: Array[string], coordinates: Array[number]) {
         grid[coordinates[0]][coordinates[1]] = "O"
     }
 
-    setBotMove(grid, coordinates) {
+    /**
+     * Sets the bot move on the tic-tac-toe grid at specific coordinates.
+     * @param grid The tic-tac-toe grid
+     * @param coordinates The coordinates of the field of the bot's move
+     */
+    setBotMove(grid: Array[string], coordinates: Array[number]) {
         grid[coordinates[0]][coordinates[1]] = "X"
     }
 
-    clearField(grid, coordinates) {
+    /**
+     * Clears a field at specific coordinates.
+     * @param grid The tic-tac-toe grid
+     * @param coordinates The coordinates of the field
+     */
+    clearField(grid: Array[string], coordinates: Array[number]) {
         grid[coordinates[0]][coordinates[1]] = " "
     }
 
-    minimax(tempGrid, isMaximizer) {
+    /**
+     * Minimax algorithm.
+     * @param tempGrid A temporary copy of the tic-tac-toe grid
+     * @param isMaximizer Whether the maximizer is due or not
+     * @returns {number}
+     */
+    minimax(tempGrid: Array[string], isMaximizer: boolean) {
         let possibleFields = this.getPossibleFields(tempGrid)
         let state = this.getTerminationState(tempGrid)
 
@@ -146,6 +190,10 @@ class TicTacToe {
 
     }
 
+    /**
+     * Returns the best possible move of the bot.
+     * @returns {Array[number]}
+     */
     getBestField() {
         let possibleFields = this.getPossibleFields(this.grid)
         let tempGrid = JSON.parse(JSON.stringify(this.grid))   // deepcopy
@@ -167,7 +215,13 @@ class TicTacToe {
         return bestField
     }
 
-    getNextWinMove(player, grid) {
+    /**
+     * Returns the move, which has to be made for a win.
+     * @param player The player's symbol
+     * @param grid The tic-tac-toe grid
+     * @returns {Array[number] | null} The field or null
+     */
+    getNextWinMove(player: string, grid: Array[string]) {
         let possibleFields = JSON.stringify(this.getPossibleFields(this.grid))
 
         // horizontal check
@@ -297,6 +351,10 @@ class TicTacToe {
         return null
     }
 
+    /**
+     * Returns a random field.
+     * @returns {Array[number]} The random field
+     */
     getRandomField() {
         let possibleFields = this.getPossibleFields(this.grid)
         let randomIndex = Math.floor(Math.random() * possibleFields.length)
@@ -304,6 +362,9 @@ class TicTacToe {
         return possibleFields[randomIndex]
     }
 
+    /**
+     * Freezes every cell by resetting the classname.
+     */
     freezeCells() {
         let cells = this.getCells()
         for (let i=0; i<9; i++) {
@@ -311,6 +372,9 @@ class TicTacToe {
         }
     }
 
+    /**
+     * Unfreezes every cell by setting the classname to 'empty'.
+     */
     unfreezeCells() {
         let cells = this.getCells()
         for (let i=0; i<9; i++) {
@@ -318,6 +382,13 @@ class TicTacToe {
         }
     }
 
+    /**
+     * Resets the game.
+     *  - Grid reset
+     *  - Cells reset
+     *  - Cells unfreeze
+     *  - State reset
+     */
     resetGame() {
         this.grid = [[" ", " ", " "],
                      [" ", " ", " "],
@@ -335,6 +406,10 @@ class TicTacToe {
 
     }
 
+    /**
+     * Event listener of cell click event.
+     * @param event The event of the event listener
+     */
     cellPressed(event) {
         let cell = event.currentTarget
         if (cell.className !== ""){
@@ -358,8 +433,7 @@ class TicTacToe {
                     this.freezeCells()
                 }
                 else {
-                    // if not draw nor player wins
-                    // bot move
+                    // if not draw nor player wins: bot move
                     let difficulty = document.getElementById("difficulty-select").value
 
                     let botField
@@ -409,6 +483,12 @@ class TicTacToe {
 
 }
 
+
+/**
+ *
+ * @param cells
+ * @param ttt
+ */
 function addCellClickListener(cells, ttt) {
     for (let i = 0; i < cells.length; i++) {
         cells[i].addEventListener("click", function(event){ttt.cellPressed(event)}, false)
@@ -416,6 +496,11 @@ function addCellClickListener(cells, ttt) {
 
 }
 
+
+/**
+ * Invoked when website loads.
+ * Adds event listeners to objects.
+ */
 function load() {
     let ttt = new TicTacToe()
     let cells = ttt.getCells()
