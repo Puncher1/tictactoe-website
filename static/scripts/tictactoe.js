@@ -41,42 +41,42 @@ class TicTacToe {
     checkWinner(player, grid) {
         // horizontal check
         for (let i=0; i<3; i++) {
-            let count_h = 0
+            let countH = 0
             for (let j=0; j<3; j++) {
                 let field = grid[i][j]
-                if (field === player) {count_h++} 
+                if (field === player) {countH++}
             }
-            if (count_h == 3) {return true}
+            if (countH == 3) {return true}
         }
 
         // vertical check
         for (let i=0; i<3; i++) {
-            let count_v = 0
+            let countV = 0
             for (let j=0; j<3; j++) {
                 let field = grid[j][i]
-                if (field === player) {count_v++} 
+                if (field === player) {countV++}
             }
-            if (count_v == 3) {return true}
+            if (countV == 3) {return true}
         }
 
         // diagonal check 1
-        let count_d = 0
+        let countD = 0
         for (let i=0; i<3; i++) {
             let field = grid[i][i]
-            if (field === player) {count_d++}
+            if (field === player) {countD++}
         }
-        if (count_d == 3) {return true}
+        if (countD == 3) {return true}
         
         // diagonal check 2
         let d = 2
-        count_d = 0
+        countD = 0
         for (let i=0; i<3; i++) {
             let field = grid[d][i]
-            if (field === player) {count_d++}
+            if (field === player) {countD++}
 
             d--
         }
-        if (count_d == 3) {return true}
+        if (countD == 3) {return true}
 
         return false
     }
@@ -84,17 +84,17 @@ class TicTacToe {
     setState(state) {
         // state: -10=lose, 0=draw, 10=win
 
-        let state_obj = document.getElementById("state")
-        state_obj.className = ""
+        let stateObj = document.getElementById("state")
+        stateObj.className = ""
         if (state == 10) {
-            state_obj.innerText = "You win!"
-            state_obj.className = ""
+            stateObj.innerText = "You win!"
+            stateObj.className = ""
         }
         else if (state == 0) {
-            state_obj.innerText = "Draw!"
+            stateObj.innerText = "Draw!"
         }
         else if (state == -10) {
-            state_obj.innerText = "You lose!"
+            stateObj.innerText = "You lose!"
         }
     }
 
@@ -110,9 +110,9 @@ class TicTacToe {
         grid[coordinates[0]][coordinates[1]] = " "
     }
 
-    minimax(temp_grid, isMaximizer) {
-        let possibleFields = this.getPossibleFields(temp_grid)
-        let state = this.getTerminationState(temp_grid)
+    minimax(tempGrid, isMaximizer) {
+        let possibleFields = this.getPossibleFields(tempGrid)
+        let state = this.getTerminationState(tempGrid)
 
         if (state == 10 || state == -10) {return state}
         if (possibleFields.length == 0) {return 0}
@@ -121,11 +121,11 @@ class TicTacToe {
             let best = -1000
             for (let i=0; i < possibleFields.length; i++) {
                 let possibleField = possibleFields[i]
-                this.setBotMove(temp_grid, [possibleField[0], possibleField[1]])
+                this.setBotMove(tempGrid, [possibleField[0], possibleField[1]])
                 
-                let possibleBest = this.minimax(temp_grid, !isMaximizer)
+                let possibleBest = this.minimax(tempGrid, !isMaximizer)
                 best = Math.max.apply(null, [best, possibleBest])
-                this.clearField(temp_grid, [possibleField[0], possibleField[1]])
+                this.clearField(tempGrid, [possibleField[0], possibleField[1]])
 
             }
             return best
@@ -135,11 +135,11 @@ class TicTacToe {
 
             for (let i=0; i < possibleFields.length; i++) {
                 let possibleField = possibleFields[i]
-                this.setPlayerMove(temp_grid, [possibleField[0], possibleField[1]])
+                this.setPlayerMove(tempGrid, [possibleField[0], possibleField[1]])
 
-                let possibleBest = this.minimax(temp_grid, !isMaximizer)
+                let possibleBest = this.minimax(tempGrid, !isMaximizer)
                 best = Math.min.apply(null, [best, possibleBest])
-                this.clearField(temp_grid, [possibleField[0], possibleField[1]])
+                this.clearField(tempGrid, [possibleField[0], possibleField[1]])
             }
             return best
         }
@@ -148,23 +148,23 @@ class TicTacToe {
 
     getBestField() {
         let possibleFields = this.getPossibleFields(this.grid)
-        let temp_grid = JSON.parse(JSON.stringify(this.grid))   // deepcopy
+        let tempGrid = JSON.parse(JSON.stringify(this.grid))   // deepcopy
 
-        let best_state = -1000
-        let best_field
+        let bestState = -1000
+        let bestField
         for (let i=0; i < possibleFields.length; i++) {
             let possibleField = possibleFields[i]
-            this.setBotMove(temp_grid, [possibleField[0], [possibleField[1]]])
+            this.setBotMove(tempGrid, [possibleField[0], [possibleField[1]]])
 
-            let state = this.minimax(temp_grid, false)
-            this.clearField(temp_grid, [possibleField[0], possibleField[1]])
+            let state = this.minimax(tempGrid, false)
+            this.clearField(tempGrid, [possibleField[0], possibleField[1]])
 
-            if (state > best_state) {
-                best_state = state
-                best_field = possibleField
+            if (state > bestState) {
+                bestState = state
+                bestField = possibleField
             }
         }
-        return best_field
+        return bestField
     }
 
     getNextWinMove(player, grid) {
@@ -172,124 +172,124 @@ class TicTacToe {
 
         // horizontal check
         for (let i=0; i<3; i++) {
-            let fields_used_h = []
-            let count_h = 0
+            let fieldsUsedH = []
+            let countH = 0
             for (let j=0; j<3; j++) {
                 let field = grid[i][j]
                 if (field == player) {
-                    fields_used_h.push([i, j])
-                    count_h++
+                    fieldsUsedH.push([i, j])
+                    countH++
                 }
             }
-            if (count_h == 2) {
-                let next_field
-                fields_used_h = JSON.stringify(fields_used_h)
+            if (countH == 2) {
+                let nextField
+                fieldsUsedH = JSON.stringify(fieldsUsedH)
 
-                if (fields_used_h.indexOf(JSON.stringify([i, 0])) == -1) {
-                    next_field = [i, 0]
+                if (fieldsUsedH.indexOf(JSON.stringify([i, 0])) == -1) {
+                    nextField = [i, 0]
                 }
-                else if (fields_used_h.indexOf(JSON.stringify([i, 1])) == -1) {
-                    next_field = [i, 1]
+                else if (fieldsUsedH.indexOf(JSON.stringify([i, 1])) == -1) {
+                    nextField = [i, 1]
                 }
                 else {
-                    next_field = [i, 2]
+                    nextField = [i, 2]
                 }
 
-                if (possibleFields.indexOf(JSON.stringify(next_field)) != -1) {
-                    return next_field
+                if (possibleFields.indexOf(JSON.stringify(nextField)) != -1) {
+                    return nextField
                 }
             }
         }
 
         // vertical check
         for (let i=0; i<3; i++) {
-            let fields_used_v = []
-            let count_v = 0
+            let fieldsUsedV = []
+            let countV = 0
             for (let j=0; j<3; j++) {
                 let field = grid[j][i]
                 if (field == player) {
-                    fields_used_v.push([j, i])
-                    count_v++
+                    fieldsUsedV.push([j, i])
+                    countV++
                 }
             }
-            if (count_v == 2) {
-                let next_field
-                fields_used_v = JSON.stringify(fields_used_v)
+            if (countV == 2) {
+                let nextField
+                fieldsUsedV = JSON.stringify(fieldsUsedV)
 
-                if (fields_used_v.indexOf(JSON.stringify([0, i])) == -1) {
-                    next_field = [0, i]
+                if (fieldsUsedV.indexOf(JSON.stringify([0, i])) == -1) {
+                    nextField = [0, i]
                 }
-                else if (fields_used_v.indexOf(JSON.stringify([1, i])) == -1) {
-                    next_field = [1, i]
+                else if (fieldsUsedV.indexOf(JSON.stringify([1, i])) == -1) {
+                    nextField = [1, i]
                 }
                 else {
-                    next_field = [2, i]
+                    nextField = [2, i]
                 }
 
-                if (possibleFields.indexOf(JSON.stringify(next_field)) != -1) {
-                    return next_field
+                if (possibleFields.indexOf(JSON.stringify(nextField)) != -1) {
+                    return nextField
                 }
             }
         }
 
         // diagonal check 1
-        let fields_used_d = []
-        let count_d = 0
+        let fieldsUsedD = []
+        let countD = 0
         for (let i=0; i<3; i++) {
             let field = grid[i][i]
             if (field === player) {
-                fields_used_d.push([i, i])
-                count_d++
+                fieldsUsedD.push([i, i])
+                countD++
             }
         }
-        if (count_d == 2) {
-            let next_field
-            fields_used_d = JSON.stringify(fields_used_d)
+        if (countD == 2) {
+            let nextField
+            fieldsUsedD = JSON.stringify(fieldsUsedD)
 
-            if (fields_used_d.indexOf(JSON.stringify([0, 0])) == -1) {
-                next_field = [0, 0]
+            if (fieldsUsedD.indexOf(JSON.stringify([0, 0])) == -1) {
+                nextField = [0, 0]
             }
-            else if (fields_used_d.indexOf(JSON.stringify([1, 1])) == -1) {
-                next_field = [1, 1]
+            else if (fieldsUsedD.indexOf(JSON.stringify([1, 1])) == -1) {
+                nextField = [1, 1]
             }
             else {
-                next_field = [2, 2]
+                nextField = [2, 2]
             }
 
-            if (possibleFields.indexOf(JSON.stringify(next_field)) != -1) {
-                return next_field
+            if (possibleFields.indexOf(JSON.stringify(nextField)) != -1) {
+                return nextField
             }
         }
 
         // diagonal check 2
         let d = 2
-        fields_used_d = []
-        count_d = 0
+        fieldsUsedD = []
+        countD = 0
         for (let i=0; i<3; i++) {
             let field = grid[d][i]
             if (field === player) {
-                fields_used_d.push([d, i])
-                count_d++
+                fieldsUsedD.push([d, i])
+                countD++
             }
 
             d--
         }
-        if (count_d == 2) {
-            let next_field
-            fields_used_d = JSON.stringify(fields_used_d)
+        if (countD == 2) {
+            let nextField
+            fieldsUsedD = JSON.stringify(fieldsUsedD)
 
-            if (fields_used_d.indexOf(JSON.stringify([2, 0])) == -1) {
-                next_field = [2, 0]
+            if (fieldsUsedD.indexOf(JSON.stringify([2, 0])) == -1) {
+                nextField = [2, 0]
             }
-            else if (fields_used_d.indexOf(JSON.stringify([1, 1])) == -1) {
-                next_field = [1, 1]
+            else if (fieldsUsedD.indexOf(JSON.stringify([1, 1])) == -1) {
+                nextField = [1, 1]
             }
             else {
-                next_field = [0, 2]
+                nextField = [0, 2]
             }
 
-            if (possibleFields.indexOf(JSON.stringify(next_field)) != -1) {
-                return next_field
+            if (possibleFields.indexOf(JSON.stringify(nextField)) != -1) {
+                return nextField
             }
 
         }
@@ -329,9 +329,9 @@ class TicTacToe {
         }
         this.unfreezeCells()
 
-        let state_obj = document.getElementById("state")
-        state_obj.innerText = "state"
-        state_obj.className = "no-state"
+        let stateObj = document.getElementById("state")
+        stateObj.innerText = "state"
+        stateObj.className = "no-state"
 
     }
 
