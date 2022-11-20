@@ -167,6 +167,136 @@ class TicTacToe {
         return best_field
     }
 
+    getNextWinMove(player, grid) {
+        let possibleFields = JSON.stringify(this.getPossibleFields(this.grid))
+
+        // horizontal check
+        for (let i=0; i<3; i++) {
+            let fields_used_h = []
+            let count_h = 0
+            for (let j=0; j<3; j++) {
+                let field = grid[i][j]
+                if (field == player) {
+                    fields_used_h.push([i, j])
+                    count_h++
+                }
+            }
+            if (count_h == 2) {
+                let next_field
+                fields_used_h = JSON.stringify(fields_used_h)
+
+                if (fields_used_h.indexOf(JSON.stringify([i, 0])) == -1) {
+                    next_field = [i, 0]
+                }
+                else if (fields_used_h.indexOf(JSON.stringify([i, 1])) == -1) {
+                    next_field = [i, 1]
+                }
+                else {
+                    next_field = [i, 2]
+                }
+
+                if (possibleFields.indexOf(JSON.stringify(next_field)) != -1) {
+                    return next_field
+                }
+            }
+        }
+
+        // vertical check
+        for (let i=0; i<3; i++) {
+            let fields_used_v = []
+            let count_v = 0
+            for (let j=0; j<3; j++) {
+                let field = grid[j][i]
+                if (field == player) {
+                    fields_used_v.push([j, i])
+                    count_v++
+                }
+            }
+            if (count_v == 2) {
+                let next_field
+                fields_used_v = JSON.stringify(fields_used_v)
+
+                if (fields_used_v.indexOf(JSON.stringify([0, i])) == -1) {
+                    next_field = [0, i]
+                }
+                else if (fields_used_v.indexOf(JSON.stringify([1, i])) == -1) {
+                    next_field = [1, i]
+                }
+                else {
+                    next_field = [2, i]
+                }
+
+                if (possibleFields.indexOf(JSON.stringify(next_field)) != -1) {
+                    return next_field
+                }
+            }
+        }
+
+        // diagonal check 1
+        let fields_used_d = []
+        let count_d = 0
+        for (let i=0; i<3; i++) {
+            let field = grid[i][i]
+            if (field === player) {
+                fields_used_d.push([i, i])
+                count_d++
+            }
+        }
+        if (count_d == 2) {
+            let next_field
+            fields_used_d = JSON.stringify(fields_used_d)
+
+            if (fields_used_d.indexOf(JSON.stringify([0, 0])) == -1) {
+                next_field = [0, 0]
+            }
+            else if (fields_used_d.indexOf(JSON.stringify([1, 1])) == -1) {
+                next_field = [1, 1]
+            }
+            else {
+                next_field = [2, 2]
+            }
+
+            if (possibleFields.indexOf(JSON.stringify(next_field)) != -1) {
+                return next_field
+            }
+        }
+
+        // diagonal check 2
+        let d = 2
+        fields_used_d = []
+        count_d = 0
+        for (let i=0; i<3; i++) {
+            let field = grid[d][i]
+            if (field === player) {
+                fields_used_d.push([d, i])
+                count_d++
+            }
+
+            d--
+        }
+        if (count_d == 2) {
+            let next_field
+            fields_used_d = JSON.stringify(fields_used_d)
+
+            if (fields_used_d.indexOf(JSON.stringify([2, 0])) == -1) {
+                next_field = [2, 0]
+            }
+            else if (fields_used_d.indexOf(JSON.stringify([1, 1])) == -1) {
+                next_field = [1, 1]
+            }
+            else {
+                next_field = [0, 2]
+            }
+
+            if (possibleFields.indexOf(JSON.stringify(next_field)) != -1) {
+                return next_field
+            }
+
+        }
+
+        return null
+    }
+
     getRandomField() {
         let possibleFields = this.getPossibleFields(this.grid)
         let randomIndex = Math.floor(Math.random() * possibleFields.length)
@@ -237,6 +367,21 @@ class TicTacToe {
                         botField = this.getRandomField()
                     }
                     else if (difficulty == "medium") {
+                        let nextBotMoveWin = this.getNextWinMove("X", this.grid)
+                        if (nextBotMoveWin !== null) {
+                            botField = nextBotMoveWin
+                        }
+                        else {
+                            let nextPlayerMoveWin = this.getNextWinMove("O", this.grid)
+                            if (nextPlayerMoveWin !== null) {
+                                botField = nextPlayerMoveWin
+
+                            }
+                            else {
+                                botField = this.getRandomField()
+                            }
+
+                        }
 
                     }
                     else if (difficulty == "impossible") {
