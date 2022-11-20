@@ -90,6 +90,17 @@ tr:last-child td{
     filter: brightness(85%);
 }
 
+#symbol-msg {
+    font-size: 18px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#components {
+    text-align: center;
+}
+
 #btn-restart {
     font-family: Courier;
     font-size: 20px;
@@ -98,10 +109,6 @@ tr:last-child td{
     background-color: #1b2748;
     border: 2px solid #1b2748;
     border-radius: 5px;
-    margin-top: 50px;
-    margin-right: auto;
-    margin-left: auto;
-    display: block;
     width: 130px;
     height: 35px;
     transition: color 0.3s, background-color 0.3s;
@@ -110,8 +117,28 @@ tr:last-child td{
 #btn-restart:hover {
     color: #1b2748;
     background-color: #4d6dbd;
+    cursor: pointer;
 }
 
 #btn-restart:active{
     filter: brightness(85%);
 }
+
+#difficulty-select {
+    font-family: Courier;
+    font-size: 19px;
+    font-weight: bold;
+    color: #4d6dbd;
+    background-color: #1b2748;
+    border: 2px solid #1b2748;
+    border-radius: 5px;
+    width: 160px;
+    height: 35px;
+    text-align: center;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+#difficulty-select:hover {
+    cursor: pointer;
+}
+

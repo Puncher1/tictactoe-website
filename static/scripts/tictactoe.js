@@ -87,14 +87,14 @@ class TicTacToe {
         let state_obj = document.getElementById("state")
         state_obj.className = ""
         if (state == 10) {
-            state_obj.innerHTML = "You win!"
+            state_obj.innerText = "You win!"
             state_obj.className = ""
         }
         else if (state == 0) {
-            state_obj.innerHTML = "Draw!"
+            state_obj.innerText = "Draw!"
         }
         else if (state == -10) {
-            state_obj.innerHTML = "You lose!"
+            state_obj.innerText = "You lose!"
         }
     }
 
@@ -188,12 +188,12 @@ class TicTacToe {
 
         let cells = this.getCells()
         for (let i=0; i<9; i++) {
-            cells[i].innerHTML = " "
+            cells[i].innerText = " "
         }
         this.unfreezeCells()
 
         let state_obj = document.getElementById("state")
-        state_obj.innerHTML = "state"
+        state_obj.innerText = "state"
         state_obj.className = "no-state"
 
     }
@@ -201,7 +201,7 @@ class TicTacToe {
     cellPressed(event) {
         let cell = event.currentTarget
         if (cell.className !== ""){
-            cell.innerHTML = "O"
+            cell.innerText = "O"
             cell.className = ""
             let colIndex = cell.cellIndex
             let rowIndex = cell.parentNode.rowIndex
@@ -219,11 +219,24 @@ class TicTacToe {
                     this.freezeCells()
                 }
                 else {
-                    let botField = this.getBestField()
+                    let difficulty = document.getElementById("difficulty-select").innerText
+                    console.log(difficulty)
+
+                    let botField
+                    if (difficulty == "Easy") {
+
+                    }
+                    else if (difficulty == "Medium") {
+
+                    }
+                    else if (difficulty == "Impossible") {
+                        botField = this.getBestField()
+                    }
+
                     this.setBotMove(this.grid, [botField[0], botField[1]])
 
                     let botCell = document.getElementById("" + botField[0] + botField[1])
-                    botCell.innerHTML = "X"
+                    botCell.innerText = "X"
                     botCell.className = ""
 
                     let isBotWin = this.checkWinner("X", this.grid)
@@ -252,7 +265,10 @@ function load() {
     let cells = ttt.getCells()
     addCellClickListener(cells, ttt)
 
-    document.getElementById("btn-restart").addEventListener("click", function(){ttt.resetGame()}, false)
+    document.getElementById("btn-restart")
+        .addEventListener("click", function(){ttt.resetGame()}, false)
+    document.getElementById("difficulty-select")
+        .addEventListener("change", function(){ttt.resetGame()}, false)
 }
 
 window.onload = load

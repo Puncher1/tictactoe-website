@@ -30,7 +30,18 @@
             </tr>
         </table>
     </div>
-    <button id="btn-restart">Restart</button>
+    <p id="symbol-msg">Your symbol: O</p>
+
+    <div id="components">
+        <button id="btn-restart">Restart</button>
+        <select id="difficulty-select">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="impossible">Impossible</option>
+        </select>
+    </div>
+
+
     <script type="text/javascript" src="{{ url_for('static', filename='scripts/tictactoe.js') }}"></script>
 </body>
 </html>
