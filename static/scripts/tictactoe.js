@@ -148,7 +148,7 @@ class TicTacToe {
 
     getBestField() {
         let possibleFields = this.getPossibleFields(this.grid)
-        let temp_grid = JSON.parse(JSON.stringify(this.grid))
+        let temp_grid = JSON.parse(JSON.stringify(this.grid))   // deepcopy
 
         let best_state = -1000
         let best_field
@@ -165,6 +165,13 @@ class TicTacToe {
             }
         }
         return best_field
+    }
+
+    getRandomField() {
+        let possibleFields = this.getPossibleFields(this.grid)
+        let randomIndex = Math.floor(Math.random() * possibleFields.length)
+
+        return possibleFields[randomIndex]
     }
 
     freezeCells() {
@@ -223,17 +230,16 @@ class TicTacToe {
                 else {
                     // if not draw nor player wins
                     // bot move
-                    let difficulty = document.getElementById("difficulty-select").innerText
-                    console.log(difficulty)
+                    let difficulty = document.getElementById("difficulty-select").value
 
                     let botField
-                    if (difficulty == "Easy") {
+                    if (difficulty == "easy") {
+                        botField = this.getRandomField()
+                    }
+                    else if (difficulty == "medium") {
 
                     }
-                    else if (difficulty == "Medium") {
-
-                    }
-                    else if (difficulty == "Impossible") {
+                    else if (difficulty == "impossible") {
                         botField = this.getBestField()
                     }
 
