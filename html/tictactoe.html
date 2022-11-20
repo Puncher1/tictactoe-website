@@ -11,7 +11,9 @@
     <header>
         <p id="header-title">Tic-Tac-Toe</p>
     </header>
+
     <p id="state" class="no-state">state</p>
+
     <div id="grid-container">
         <table id="grid">
             <tr class="row1">
@@ -31,17 +33,21 @@
             </tr>
         </table>
     </div>
+
     <p id="symbol-msg">Your symbol: O</p>
 
     <div id="components">
-        <button id="btn-restart">Restart</button>
-        <select id="difficulty-select">
-            <option value="easy">Easy</option>
-            <option value="medium" selected>Medium</option>
-            <option value="impossible">Impossible</option>
+        <button id="btn-restart" class="inline-components">Restart</button>
+        <select class="" id="difficulty-select" class="inline-components">
+            <option value="easy" id="opt-easy">Easy</option>
+            <option value="medium" id="opt-medium" selected>Medium</option>
+            <option value="impossible" id="opt-impossible">Impossible</option>
         </select>
     </div>
 
+    <a id="github-link" href="https://github.com/puncher1/tictactoe-website">
+        <img id="github-icon" alt="github" src="./../static/style/images/github.png">
+    </a>
 
     <script type="text/javascript" src="{{ url_for('static', filename='scripts/tictactoe.js') }}"></script>
 </body>

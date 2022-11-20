@@ -5,7 +5,7 @@ body {
     color: #1B2748FF;
     background-color: #4d6dbd;
     padding: 0 0 0 0;
-    margin: 0 0 50px 0;
+    margin: 0 0 10px 0;
 }
 
 header {
@@ -14,11 +14,19 @@ header {
     margin-right: auto;
     margin-left: auto;
 }
+
+img {
+    font-family: Arial;
+    font-size: 12px;
+}
+
+
 #header-title {
     margin-top: 0;
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
 
 #state {
     font-size: 24px;
@@ -30,6 +38,7 @@ header {
 .no-state {
     text-indent: -9999px
 }
+
 
 #grid-container {
     border: 2px solid #344b86;
@@ -90,12 +99,14 @@ tr:last-child td{
     filter: brightness(85%);
 }
 
+
 #symbol-msg {
     font-size: 18px;
     text-align: center;
     margin-right: auto;
     margin-left: auto;
 }
+
 
 #components {
     text-align: center;
@@ -112,6 +123,7 @@ tr:last-child td{
     width: 130px;
     height: 35px;
     transition: color 0.3s, background-color 0.3s;
+    vertical-align: middle;
 }
 
 #btn-restart:hover {
@@ -124,6 +136,7 @@ tr:last-child td{
     filter: brightness(85%);
 }
 
+
 #difficulty-select {
     font-family: Courier;
     font-size: 19px;
@@ -132,13 +145,29 @@ tr:last-child td{
     background-color: #1b2748;
     border: 2px solid #1b2748;
     border-radius: 5px;
-    width: 160px;
+    width: 130px;
     height: 35px;
     text-align: center;
     transition: color 0.3s, background-color 0.3s;
+    vertical-align: middle;
+}
+
+.difficulty-impossible {
+    font-size: 15px !important;
 }
 
 #difficulty-select:hover {
     cursor: pointer;
 }
 
+#opt-impossible {
+    font-size: 17px;
+}
+
+#github-icon, #github-link {
+    width: 30px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 2%;
+}

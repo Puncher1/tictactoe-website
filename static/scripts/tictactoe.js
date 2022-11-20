@@ -406,6 +406,20 @@ class TicTacToe {
 
     }
 
+    difficultySelectionChanged(difficultySelect) {
+        let difficulty = difficultySelect.value
+
+        if (difficulty == "impossible") {
+            console.log("change")
+            difficultySelect.className = "difficulty-impossible"
+        }
+        else {
+            difficultySelect.className = ""
+        }
+        console.log(difficulty)
+        this.resetGame()
+    }
+
     /**
      * Event listener of cell click event.
      * @param event The event of the event listener
@@ -509,7 +523,7 @@ function load() {
     document.getElementById("btn-restart")
         .addEventListener("click", function(){ttt.resetGame()}, false)
     document.getElementById("difficulty-select")
-        .addEventListener("change", function(){ttt.resetGame()}, false)
+        .addEventListener("change", function(){ttt.difficultySelectionChanged(this)}, false)
 }
 
 window.onload = load
