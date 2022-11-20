@@ -209,16 +209,20 @@ class TicTacToe {
             this.setPlayerMove(this.grid, [rowIndex, colIndex])
             let isPlayerWin = this.checkWinner("O", this.grid)
             if (isPlayerWin) {
+                // player wins
                 this.setState(10)
                 this.freezeCells()
             }
             else {
                 let possibleFields = this.getPossibleFields(this.grid)
                 if (possibleFields.length == 0) {
+                    // draw
                     this.setState(0)
                     this.freezeCells()
                 }
                 else {
+                    // if not draw nor player wins
+                    // bot move
                     let difficulty = document.getElementById("difficulty-select").innerText
                     console.log(difficulty)
 
@@ -241,6 +245,7 @@ class TicTacToe {
 
                     let isBotWin = this.checkWinner("X", this.grid)
                     if (isBotWin) {
+                        // player loses
                         this.setState(-10)
                         this.freezeCells()
                     }
