@@ -13,5 +13,5 @@ The simple game Tic-Tac-Toe which comes with an AI based on the minimax algorith
 This game comes with 3 difficulty levels
 
 * **easy:** The "AI" (if you still can tell this AI) just picks a field randomly. This makes it really easy for the player to win.
-* **medium:** The AI randomly chooses either a field or if the AI or player needs a field to win, it chooses that field. This makes it more difficult, but still winnable.
+* **medium:** The AI chooses either a random field or if the AI or player needs a field to win, it chooses that field. This makes it more difficult, but still winnable.
 * **impossible:** The AI uses the minimax algorithm for every choose of its field. This makes it impossible to win. The player either makes a draw or loses.
