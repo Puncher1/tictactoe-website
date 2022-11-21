@@ -50,7 +50,6 @@ img {
 }
 
 #grid {
-    /*border-top: 2px solid black;*/
     width: 100%;
     height: 100%;
     border-collapse: separate;
@@ -164,10 +163,24 @@ tr:last-child td{
     font-size: 17px;
 }
 
+
 #github-icon, #github-link {
     width: 30px;
     display: block;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 2%;
+    margin-top: 1%;
+}
+
+#github-icon {
+    color: #1b2748;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    transition: 0.5s;
+}
+
+#github-icon:hover {
+    color: #7da3fa;
+    /*color: #1b2748;*/
+    transform: translate(0px, -3px)
 }

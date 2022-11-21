@@ -5,6 +5,7 @@
     <link rel="shortcut icon" href="./../static/style/images/puncher.png">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="{{ url_for('static', filename='style/styles.css') }}" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/feather-icons"></script>
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
@@ -46,9 +47,11 @@
     </div>
 
     <a id="github-link" href="https://github.com/puncher1/tictactoe-website" target="_blank" rel="noopener noreferrer">
-        <img id="github-icon" alt="github" src="./../static/style/images/github.png">
+        <i data-feather="github" id="github-icon"></i>
     </a>
 
     <script type="text/javascript" src="{{ url_for('static', filename='scripts/tictactoe.js') }}"></script>
+
+    <script>feather.replace()</script>
 </body>
 </html>
