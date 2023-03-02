@@ -527,3 +527,4 @@ function load() {
 }
 
 window.onload = load
+// sali janick
